@@ -1,0 +1,93 @@
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+</head>
+
+
+
+<body>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+       var func = function(){
+       $('#name').on('input',function(){
+
+       var input = $(this);
+       var is_name = input.val();
+       var letters = /^[ A-Za-z]+$/;
+
+       if (!is_name.match(letters))
+       {
+
+        $('#info_message').text('');
+        $('#info_message').text('niggas they gonna hate');
+       }
+       else
+       $('#info_message').text('');
+       });
+
+
+
+       $('#age').on('input',function(){
+       var input = $(this);
+       var is_age = input.val();
+       var letters = /^[ 0-9]+$/;
+       if(!is_age.match(letters))
+       {
+        $('#info_message').text('bitches they gonna talk');
+       }
+       else
+        $('#info_message').text('');
+       });
+
+      };
+
+      func();
+
+       $('#senddata').click(function(event){
+            var name = $('#name').val();
+            var age = $('#age').val();
+            console.log(name+" "+age);
+            var letters = /^[ A-Za-z]+$/;
+            var letters2 = /^[0-9]+$/;
+            var val1 = name.match(letters);
+            var val2 = age.match(letters2);
+            if(!val1)
+            {
+              $('#info_message').text('');
+              $('#info_message').text('niggas they gonna hate');
+              event.preventDefault();
+            }
+            else if(!val2)
+            {
+              $('#info_message').text('');
+              $('#info_message').text('bitches they gonna talk');
+              event.preventDefault();
+            }
+       });
+
+
+
+    });
+
+
+</script>
+
+<h1 id="info_message"></h1>
+<form id="form"  method="post" action="/">
+    <br>
+    <br>
+     name : <input type="text" name="name" id="name">
+    <br>
+    <br>
+     age : <input type="text" name="age" id ="age">
+    <br>
+    <br>
+    <button id="senddata"  >eyo i sit back</button>
+</form>
+
+</body>
+</html>
