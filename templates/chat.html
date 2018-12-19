@@ -1,0 +1,34 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>my_chat_app</title>
+</head>
+
+<body>
+<div class="page-header">
+    <h1>{{Details['reciever']}}</h1>
+</div>
+
+<div class="page-header">
+    <h4>Messages</h4>
+</div>
+
+<ul class="list-group list-group-flush">
+    {% for message in Details['messages'] %}
+    <li class="list-group-item"><strong>{{message[1]}}</strong> : {{message[3]}}</li>
+    {% endfor %}
+</ul>
+
+<label for="send_message">send message</label>
+<form id="send_message" method="POST" action="/chat/{{Details['reciever']}}">
+  <div class="form-group">
+    <input type="text" class="form-control" id="message" name="message" placeholder="type.." >
+      <small id="empty_message"></small>
+  </div>
+  <button type="submit" id="send" class="btn btn-primary">Submit</button>
+</form>
+
+</body>
+</html>

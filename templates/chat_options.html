@@ -12,7 +12,7 @@
 </div>
 <ul class="list-group list-group-flush">
     {% for option in options%}
-     <li class="list-group-item">{{option[0]}}</li>
+    <a href="/chat/{{option[0]}}"><li class="list-group-item"><strong>{{option[0]}}</strong></li></a>
     {% endfor %}
 </ul>
 </body>

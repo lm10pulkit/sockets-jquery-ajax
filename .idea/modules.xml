@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../flask/.idea/flask.iml" filepath="$PROJECT_DIR$/../flask/.idea/flask.iml" />
       <module fileurl="file://$PROJECT_DIR$/../flask_mysql/.idea/flask_mysql.iml" filepath="$PROJECT_DIR$/../flask_mysql/.idea/flask_mysql.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/socketio.iml" filepath="$PROJECT_DIR$/.idea/socketio.iml" />
     </modules>
