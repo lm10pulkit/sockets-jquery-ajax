@@ -1,0 +1,19 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>my_chat_app</title>
+</head>
+
+<body>
+<div class="page-header">
+  <h1>Chat Options</h1>
+</div>
+<ul class="list-group list-group-flush">
+    {% for option in options%}
+     <li class="list-group-item">{{option[0]}}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -8,6 +8,9 @@ def index():
     if request.method=="POST":
         print(request.form)
     return render_template('main.html')
+
+
+
 if __name__=='__main__':
     app.run(debug =True)
 

@@ -1,0 +1,133 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>my_chat_app</title>
+</head>
+
+<body>
+<script type="text/javascript" >
+  var  passwordstrength = function(s){
+  var i =0;
+  var check1 = false, check2 =false;
+  var check3 = false;
+  for(i=0;i<s.length;i++)
+  {
+    if(s.charAt(i)>='a'&&s.charAt(i)<='z')
+    check1=true;
+    else if(s.charAt(i)>='A'&&s.charAt(i)<='Z')
+    check2 = true;
+    else if(s.charAt(i)>='0'&&s.charAt(i)<='9')
+    check3= true;
+  }
+   if(check1&&check2&&check3)
+   return true;
+   else
+   return false;
+};
+
+
+var check_length = function(username){
+   if(username.length>7)
+   return true;
+   else
+   return false;
+};
+
+</script>
+<script type="text/javascript" >
+
+
+ $(document).ready(function(){
+      console.log('hello');
+   $('#username').on('input',function(){
+      var value = $(this).val();
+      if(!check_length(value))
+      $('#username_message').text("username's length must be 8 or longer ");
+      else
+      $('#username_message').text('');
+   });
+
+    $('#password').on('input',function(){
+     var value =$(this).val();
+      if(!check_length(value))
+      $('#password_message').text("password's length must be 8 or longer ");
+      else if(!passwordstrength(value))
+      $('#password_message').text("password must contain lowercase alphabets , uppercase alphabets and nos ");
+      else
+      $('#password_message').text("");
+     });
+
+     $('#signupsend').click(function(event){
+        event.preventDefault();
+        var check1 = false, check2=false;
+        var value = $('#username').val();
+
+        if(!check_length(value))
+        $('#username_message').text("username's length must be 8 or longer ");
+        else{
+         check1 = true;
+         $('#username_message').text('');
+         }
+
+       var value1 =$('#password').val();
+       if(!check_length(value1))
+       $('#password_message').text("password's length must be 8 or longer ");
+       else if(!passwordstrength(value1))
+       $('#password_message').text("password must contain lowercase alphabets , uppercase alphabets and nos ");
+       else{
+        check2=true;
+       $('#password_message').text("");
+       }
+
+      console.log(check1);
+      console.log(check2);
+
+      if(check1&&check2)
+      $('#signup').submit();
+
+     });
+ });
+
+
+
+</script>
+
+
+<h2>Chat_App</h2>
+<label for="signup">Sign Up Here</label>
+<form id="signup" method="POST" action="/signup">
+  <div class="form-group">
+    <label for="username">username</label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="username">
+      <small id="username_message"></small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" id="password" placeholder="password">
+      <small id="password_message"></small>
+  </div>
+  <button type="submit" id="signupsend" class="btn btn-primary">Submit</button>
+</form>
+
+
+<label for="login">login Here</label>
+<form id="login" method="POST" action="/login">
+  <div class="form-group">
+    <label for="login_username">username</label>
+    <input type="text" class="form-control" id="login_username" name="username" placeholder="username" required>
+      <small id="login_username_message"></small>
+  </div>
+  <div class="form-group">
+    <label for="login_password">Password</label>
+    <input type="password" class="form-control" name="password" id="login_password" placeholder="password" required>
+      <small id="login_password_message"></small>
+  </div>
+  <button type="submit" id="loginsend" class="btn btn-primary">Submit</button>
+</form>
+
+</body>
+
+</html>
