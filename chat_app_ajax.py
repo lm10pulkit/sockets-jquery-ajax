@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect,session,url_for
+from flask import Flask,render_template,request,redirect,session,url_for,jsonify
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
 import os
@@ -124,7 +124,17 @@ def chat(r_username=None):
             return redirect(url_for('index'))
 
 
-
+@app.route('/check_username',methods=['POST'])
+def check_username():
+    username=str(request.form['username'])
+    cur = mysql.connection.cursor()
+    query= "select username from users where username = (%s)"
+    param=[username]
+    resultValue=cur.execute(query,param)
+    if resultValue==1:
+        return jsonify({"success":"done"})
+    else:
+        return jsonify({"failure":"done"})
 
 if(__name__=='__main__'):
     app.run(debug=True)

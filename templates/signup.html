@@ -89,6 +89,52 @@ var check_length = function(username){
       $('#signup').submit();
 
      });
+
+     $('#login_username').on('input',function(){
+     var value = $(this).val();
+     $.ajax({
+     type:'POST',
+     url:'/check_username',
+     data:{
+     username:value
+     }
+     }).done(function(data)
+     {
+        if(data.failure)
+        $('#login_username_message').text('Username is invalid');
+        if(data.success)
+        $('#login_username_message').text('');
+     });
+
+     });
+
+
+     $('#loginsend').on('click',function(event){
+       event.preventDefault();
+        var value = $('#login_username').val();
+
+         $.ajax({
+     type:'POST',
+     url:'/check_username',
+     data:{
+     username:value
+     }
+     }).done(function(data)
+     {
+        if(data.failure)
+        $('#login_username_message').text('Username is invalid');
+        if(data.success)
+        {
+
+        $('#login_username_message').text('');
+        $('#login').submit();
+        }
+     });
+
+     });
+
+
+
  });
 
 
