@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect,session,url_for,jsonify
+from flask import Flask,render_template,request,redirect,session,url_for,jsonify,json,Response
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
 import os
@@ -98,9 +98,9 @@ def chat(r_username=None):
         resultValue = cur.execute(" select * from users where username ='%s' " % (r_username))
         if 'user' in session:
             if resultValue ==0:
-                return '<h2>No user of this username registered</h2>'
-            elif r_username==session['user']:
-                return '<h2>Come on dawg! u cant send urself a message</h2>'
+                return redirect(url_for('chatoptions'))
+            elif str(r_username)==str(session['user']):
+                return redirect(url_for('chatoptions'))
             else:
                 dict={}
                 dict['reciever']=str(r_username)
@@ -126,15 +126,88 @@ def chat(r_username=None):
 
 @app.route('/check_username',methods=['POST'])
 def check_username():
+
     username=str(request.form['username'])
+
     cur = mysql.connection.cursor()
+
     query= "select username from users where username = (%s)"
     param=[username]
+
     resultValue=cur.execute(query,param)
+
     if resultValue==1:
         return jsonify({"success":"done"})
     else:
         return jsonify({"failure":"done"})
+
+
+@app.route('/add_message', methods=['POST'])
+def add_message():
+    if 'user' in session:
+
+        cur =mysql.connection.cursor()
+
+        query = "insert into unread (sender,reciever,message) values (%s,%s,%s)"
+
+        sender = session['user']
+
+        reciever= request.form['reciever']
+
+        message= request.form['message']
+
+        param= [sender, reciever, message]
+
+        cur.execute(query,param)
+
+        mysql.connection.commit()
+
+        cur.close()
+
+        return jsonify({'success':True})
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/return_message', methods=['POST'])
+def return_message():
+    if request.method=='POST':
+        if 'user' in session:
+            sender = session['user']
+            reciever = request.form['reciever']
+
+            query='select * from unread where (sender = (%s) and reciever =(%s)) or (sender = (%s) and reciever =(%s)) '
+            params=[sender,reciever,reciever,sender]
+            cur = mysql.connection.cursor()
+            resultValue=cur.execute(query,params)
+
+            if resultValue==0:
+                return jsonify({'nomessage':True})
+
+            else:
+                messages= cur.fetchall()
+
+            # switching messages from unread database to messages database
+                query = 'insert into messages (sender,reciever,message) select * from unread where (sender = (%s) and reciever =(%s)) or (sender = (%s) and reciever =(%s)) '
+                params = [sender, reciever, reciever, sender]
+                cur.execute(query, params)
+                mysql.connection.commit()
+
+            # deleting messaging
+                query = 'delete from unread where (sender = (%s) and reciever =(%s)) or (sender = (%s) and reciever =(%s)) '
+                cur.execute(query,params)
+                mysql.connection.commit()
+                cur.close()
+               # converting tuple into list using list function
+                messages=list(messages)
+                print(messages)
+
+                return Response(json.dumps({"messages":messages}),  mimetype='application/json')
+
+        else:
+            return redirect(url_for(index))
+
+
 
 if(__name__=='__main__'):
     app.run(debug=True)

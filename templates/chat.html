@@ -7,15 +7,78 @@
 </head>
 
 <body>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+     $('#send').on('click',function(event){
+           event.preventDefault();
+           var val = $('#message').val();
+           if(val.length==0)
+           {
+            $('#empty_message').text('empty message cant be send!');
+           }
+           else
+           {
+            var value = '{{Details["reciever"]}}'
+            var cal = $('#message').val()
+
+            $('#empty_message').text('message has been send!! ');
+            $.ajax({
+                type:'POST',
+                 url:'/add_message',
+                 data:{
+                 reciever:value,
+                 message:cal
+                 }
+                 }).done(function(data)
+                 {
+                  $('#message').val('');
+                 });
+           }
+           });
+
+           function messages()
+           {
+             var value = '{{Details["reciever"]}}';
+             $.ajax({
+             type:'POST',
+             url:'/return_message',
+             data:
+             {
+             reciever:value
+             }
+             }).done(function(data)
+             {
+               var nomessage = data['nomessage'];
+                console.log(nomessage);
+               var message =data['messages'];
+               if(!nomessage)
+               {
+                for(var x =0;x<message.length;x++)
+                {
+                 console.log(message[x]);
+                 $(message_list).append('<li class="list-group-item"><strong>'+message[x][0]+'</strong> : '+message[0][2]+'</li>');
+                //end of for
+                }
+                //end of if here
+               }
+                setTimeout(messages,2000);
+               //ajax done function
+             });
+           }
+         messages();
+
+    });
+</script>
 <div class="page-header">
-    <h1>{{Details['reciever']}}</h1>
+    <h1 >{{Details['reciever']}}</h1>
 </div>
 
 <div class="page-header">
     <h4>Messages</h4>
 </div>
 
-<ul class="list-group list-group-flush">
+<ul id='message_list' class="list-group list-group-flush">
     {% for message in Details['messages'] %}
     <li class="list-group-item"><strong>{{message[1]}}</strong> : {{message[3]}}</li>
     {% endfor %}

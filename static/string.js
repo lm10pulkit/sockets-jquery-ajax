@@ -23,3 +23,14 @@ var check_length = function(username){
    else
    return false;
 };
+
+function messages()
+{
+    $(ajax).({
+    url:'/return_message',
+    type:'POST',
+    data:{
+    reciever:reciever
+    }
+    })
+}
