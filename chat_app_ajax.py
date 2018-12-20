@@ -18,14 +18,14 @@ bcrypt= Bcrypt(app)
 @app.route('/')
 def index():
     if 'user' in session:
-        return 'u are already logged in'
+        return redirect(url_for('chatoptions'))
     return render_template('signup.html')
 
 @app.route('/signup',methods=['POST','GET'])
 def signup():
     if request.method == 'POST':
         if 'user' in session:
-            return 'u are already logged in'
+            return redirect(url_for('chatoptions'))
         data = request.form
         username = data['username']
         password = data['password']
@@ -37,12 +37,12 @@ def signup():
         session['user']=username
         return redirect(url_for('chatoptions'))
     else:
-        return 'get'
+        return redirect(url_for('index'))
 
 @app.route('/login', methods=['POST'])
 def login():
     if 'user' in session:
-        return 'u are already logged in'
+        return redirect(url_for('chatoptions'))
     forms = request.form
     username = forms['username']
     password = forms['password']
@@ -71,20 +71,24 @@ def protected():
 @app.route('/logout')
 def logout():
     session.pop('user', None)
-    return 'logged out!'
+    return redirect(url_for('index'))
 
 
 @app.route('/chatoptions')
 def chatoptions():
     if 'user' in session:
+
         cur= mysql.connection.cursor()
         username = str(session['user'])
         resultValue = cur.execute(" select * from users where username <>'%s' " %(username))
+
         if resultValue>0:
             options=cur.fetchall()
             return render_template('chat_options.html',options=options)
+
         else:
             'there is no one to chat'
+
     return redirect(url_for('index'))
 
 @app.route('/chat/<r_username>', methods=['GET','POST'])
@@ -94,6 +98,7 @@ def chat(r_username=None):
     reciever = str(r_username)
     sender = str(session['user'])
     cur = mysql.connection.cursor()
+
     if request.method=='GET':
         resultValue = cur.execute(" select * from users where username ='%s' " % (r_username))
         if 'user' in session:
@@ -102,8 +107,10 @@ def chat(r_username=None):
             elif str(r_username)==str(session['user']):
                 return redirect(url_for('chatoptions'))
             else:
+
                 dict={}
                 dict['reciever']=str(r_username)
+
 
                 select_stmt = ("select * from messages where (sender = (%s) and reciever=(%s)) or (sender = (%s) and reciever=(%s))")
                 data =(sender,reciever,reciever,sender)
@@ -111,6 +118,7 @@ def chat(r_username=None):
                 dict['messages']=cur.fetchall()
                 print(dict['messages'])
                 return render_template('chat.html',Details=dict)
+
         else:
             return redirect(url_for('index'))
     else:
@@ -145,7 +153,7 @@ def check_username():
 @app.route('/add_message', methods=['POST'])
 def add_message():
     if 'user' in session:
-
+# adding message to the database
         cur =mysql.connection.cursor()
 
         query = "insert into unread (sender,reciever,message) values (%s,%s,%s)"
@@ -169,6 +177,7 @@ def add_message():
         return redirect(url_for('index'))
 
 
+# logical wrong does not provide required functionality
 @app.route('/return_message', methods=['POST'])
 def return_message():
     if request.method=='POST':
