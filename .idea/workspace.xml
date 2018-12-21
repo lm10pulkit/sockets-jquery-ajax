@@ -547,6 +547,9 @@
       <change beforePath="$PROJECT_DIR$/../flask_mysql/templates/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../flask_mysql/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../flask_mysql/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flask_mysql/templates/protected.html" beforeDir="false" afterPath="$PROJECT_DIR$/../flask_mysql/templates/protected.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat_app_ajax.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat_app_ajax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chat.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -562,9 +565,9 @@
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="2" />
-          <entry key="project.open.time.6" value="7" />
+          <entry key="project.open.time.6" value="8" />
           <entry key="project.open.time.7" value="2" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -586,44 +589,44 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="7" />
-          <entry key="html" value="7620" />
+          <entry key="html" value="7701" />
           <entry key="js" value="715" />
-          <entry key="py" value="7112" />
+          <entry key="py" value="7185" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="7620" />
+          <entry key="HTML" value="7701" />
           <entry key="JavaScript" value="715" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="7112" />
+          <entry key="Python" value="7185" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chat_app_ajax.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="179" column="55" selection-start-line="179" selection-start-column="55" selection-end-line="179" selection-end-column="55" />
+            <state relative-caret-position="551">
+              <caret line="124" column="51" selection-start-line="124" selection-start-column="51" selection-end-line="124" selection-end-column="51" />
               <folding>
                 <element signature="e#0#94#0" expanded="true" />
-                <marker date="1545318074979" expanded="true" signature="2166:6789" ph="..." />
-                <marker date="1545318074979" expanded="true" signature="4217:6789" ph="..." />
-                <marker date="1545318074979" expanded="true" signature="4610:6789" ph="..." />
-                <marker date="1545318074979" expanded="true" signature="6786:6789" ph="..." />
+                <marker date="1545367596374" expanded="true" signature="2166:6716" ph="..." />
+                <marker date="1545367596374" expanded="true" signature="4294:6716" ph="..." />
+                <marker date="1545367596374" expanded="true" signature="4687:6716" ph="..." />
+                <marker date="1545367596374" expanded="true" signature="6713:6716" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/chat.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1682">
-              <caret line="58" column="40" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+            <state relative-caret-position="372">
+              <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -664,12 +667,12 @@
         <option value="$PROJECT_DIR$/../flask/main.py" />
         <option value="$PROJECT_DIR$/templates/signup.html" />
         <option value="$PROJECT_DIR$/static/string.js" />
-        <option value="$PROJECT_DIR$/templates/chat.html" />
         <option value="$PROJECT_DIR$/chat_app_ajax.py" />
+        <option value="$PROJECT_DIR$/templates/chat.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="191" />
     <option name="y" value="35" />
     <option name="width" value="2266" />
@@ -880,31 +883,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/string.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="957">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/chat_app_ajax.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="179" column="55" selection-start-line="179" selection-start-column="55" selection-end-line="179" selection-end-column="55" />
+        <state relative-caret-position="551">
+          <caret line="124" column="51" selection-start-line="124" selection-start-column="51" selection-end-line="124" selection-end-column="51" />
           <folding>
             <element signature="e#0#94#0" expanded="true" />
-            <marker date="1545318074979" expanded="true" signature="2166:6789" ph="..." />
-            <marker date="1545318074979" expanded="true" signature="4217:6789" ph="..." />
-            <marker date="1545318074979" expanded="true" signature="4610:6789" ph="..." />
-            <marker date="1545318074979" expanded="true" signature="6786:6789" ph="..." />
+            <marker date="1545367596374" expanded="true" signature="2166:6716" ph="..." />
+            <marker date="1545367596374" expanded="true" signature="4294:6716" ph="..." />
+            <marker date="1545367596374" expanded="true" signature="4687:6716" ph="..." />
+            <marker date="1545367596374" expanded="true" signature="6713:6716" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/chat.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1682">
-          <caret line="58" column="40" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/string.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="957">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        <state relative-caret-position="372">
+          <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
         </state>
       </provider>
     </entry>

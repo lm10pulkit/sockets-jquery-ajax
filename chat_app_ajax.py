@@ -95,40 +95,66 @@ def chatoptions():
 def chat(r_username=None):
     if 'user' not in session:
         return redirect(url_for('index'))
+
     reciever = str(r_username)
+
     sender = str(session['user'])
+
     cur = mysql.connection.cursor()
 
     if request.method=='GET':
+
         resultValue = cur.execute(" select * from users where username ='%s' " % (r_username))
+
         if 'user' in session:
+
             if resultValue ==0:
+
                 return redirect(url_for('chatoptions'))
+
             elif str(r_username)==str(session['user']):
+
                 return redirect(url_for('chatoptions'))
+
             else:
 
                 dict={}
+
                 dict['reciever']=str(r_username)
 
+                dict['sender']=str(session['user'])
 
                 select_stmt = ("select * from messages where (sender = (%s) and reciever=(%s)) or (sender = (%s) and reciever=(%s))")
+
                 data =(sender,reciever,reciever,sender)
+
                 cur.execute(select_stmt,data)
+
                 dict['messages']=cur.fetchall()
+
                 print(dict['messages'])
+
                 return render_template('chat.html',Details=dict)
 
         else:
+
             return redirect(url_for('index'))
     else:
+
         if 'user' in session:
+
             message = str(request.form['message'])
+
             cur.execute("INSERT INTO messages (sender,reciever,message) values (%s,%s,%s)" ,(sender,reciever,message))
+
             mysql.connection.commit()
+
             cur.close()
+
             return redirect(url_for('chat',r_username=reciever))
+
         else:
+
             return redirect(url_for('index'))
 
 
@@ -185,8 +211,8 @@ def return_message():
             sender = session['user']
             reciever = request.form['reciever']
 
-            query='select * from unread where (sender = (%s) and reciever =(%s)) or (sender = (%s) and reciever =(%s)) '
-            params=[sender,reciever,reciever,sender]
+            query='select * from unread where (sender = (%s) and reciever =(%s))'
+            params=[reciever,sender]
             cur = mysql.connection.cursor()
             resultValue=cur.execute(query,params)
 
@@ -197,13 +223,13 @@ def return_message():
                 messages= cur.fetchall()
 
             # switching messages from unread database to messages database
-                query = 'insert into messages (sender,reciever,message) select * from unread where (sender = (%s) and reciever =(%s)) or (sender = (%s) and reciever =(%s)) '
-                params = [sender, reciever, reciever, sender]
+                query = 'insert into messages (sender,reciever,message) select * from unread where (sender = (%s) and reciever =(%s)) '
+                params = [reciever, sender]
                 cur.execute(query, params)
                 mysql.connection.commit()
 
             # deleting messaging
-                query = 'delete from unread where (sender = (%s) and reciever =(%s)) or (sender = (%s) and reciever =(%s)) '
+                query = 'delete from unread where (sender = (%s) and reciever =(%s))'
                 cur.execute(query,params)
                 mysql.connection.commit()
                 cur.close()

@@ -19,16 +19,17 @@
            }
            else
            {
-            var value = '{{Details["reciever"]}}'
-            var cal = $('#message').val()
-
+            var value = '{{Details["reciever"]}}';
+            var message1 = $('#message').val();
+            var sender = '{{Details["sender"]}}'
+            $(message_list).append('<li class="list-group-item"><strong>'+sender+'</strong> : '+message1+'</li>');
             $('#empty_message').text('message has been send!! ');
             $.ajax({
                 type:'POST',
                  url:'/add_message',
                  data:{
                  reciever:value,
-                 message:cal
+                 message:message1
                  }
                  }).done(function(data)
                  {
@@ -73,17 +74,14 @@
 <div class="page-header">
     <h1 >{{Details['reciever']}}</h1>
 </div>
-
 <div class="page-header">
     <h4>Messages</h4>
 </div>
-
 <ul id='message_list' class="list-group list-group-flush">
     {% for message in Details['messages'] %}
     <li class="list-group-item"><strong>{{message[1]}}</strong> : {{message[3]}}</li>
     {% endfor %}
 </ul>
-
 <label for="send_message">send message</label>
 <form id="send_message" method="POST" action="/chat/{{Details['reciever']}}">
   <div class="form-group">
@@ -92,6 +90,5 @@
   </div>
   <button type="submit" id="send" class="btn btn-primary">Submit</button>
 </form>
-
 </body>
 </html>
